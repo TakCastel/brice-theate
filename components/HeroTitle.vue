@@ -14,7 +14,7 @@
       <span class="cursor">|</span>
     </h1>
     <p
-      class="text-xl md:text-2xl font-normal uppercase tracking-wider text-gray-600 mb-12 h-8 flex items-center justify-center"
+      class="text-xl md:text-2xl font-normal uppercase tracking-wider text-gray-600 mb-8 h-8 flex items-center justify-center"
     >
       <span
         v-for="(letter, index) in subtitleLetters"

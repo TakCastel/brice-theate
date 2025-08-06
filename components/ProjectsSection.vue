@@ -1,9 +1,9 @@
 <template>
   <section
     id="scripts"
-    class="projects-section sticky top-0 min-h-screen py-24 bg-white z-10 border-t-[0.5px] border-black flex items-center justify-center"
+    class="projects-section sticky top-0 min-h-screen py-24 bg-white z-10 border-t-[0.25px] border-black flex items-center justify-center"
   >
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <div>
         <h2
           class="section-title text-3xl md:text-4xl font-normal tracking-tight mb-16 text-center animate-on-scroll"

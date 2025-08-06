@@ -1,6 +1,6 @@
 <template>
   <div
-    class="project-card bg-white border-[0.5px] border-black p-6 hover:shadow-lg transition-all duration-300"
+    class="project-card bg-white border-[0.25px] border-black p-6 hover:shadow-lg transition-all duration-300"
   >
     <!-- Header de la card -->
     <div class="flex items-start justify-between mb-4">
@@ -27,12 +27,12 @@
           <img
             :src="project.image"
             :alt="`Affiche - ${project.title}`"
-            class="w-full h-full object-cover border-[0.5px] border-black hover:opacity-80 transition-opacity"
+            class="w-full h-full object-cover border-[0.25px] border-black hover:opacity-80 transition-opacity"
           />
         </div>
         <div
           v-else
-          class="project-image w-16 h-20 border-[0.5px] border-black bg-gray-100 flex items-center justify-center animate-on-scroll stagger-3"
+          class="project-image w-16 h-20 border-[0.25px] border-black bg-gray-100 flex items-center justify-center animate-on-scroll stagger-3"
         >
           <span
             class="text-gray-400 text-xs font-normal tracking-wider text-center"

@@ -1,8 +1,8 @@
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b-[0.5px] border-black"
+    class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b-[0.25px] border-black"
   >
-    <div class="max-w-4xl mx-auto py-4">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6 py-4">
       <div class="flex justify-between items-center">
         <!-- Logo/Titre -->
         <div class="-ml-0.5">
@@ -52,19 +52,19 @@
         <!-- Bouton Burger Mobile -->
         <button
           @click="toggleMenu"
-          class="md:hidden flex flex-col space-y-1 p-2"
+          class="md:hidden flex flex-col justify-center items-center w-8 h-8 relative"
           :class="{ 'menu-open': isMenuOpen }"
         >
-          <span class="w-6 h-0.5 bg-black transition-all duration-300"></span>
-          <span class="w-6 h-0.5 bg-black transition-all duration-300"></span>
-          <span class="w-6 h-0.5 bg-black transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-black transition-all duration-300 origin-center"></span>
+          <span class="w-6 h-0.5 bg-black transition-all duration-300 origin-center mt-1"></span>
+          <span class="w-6 h-0.5 bg-black transition-all duration-300 origin-center mt-1"></span>
         </button>
       </div>
 
       <!-- Menu Mobile -->
       <nav
         v-show="isMenuOpen"
-        class="md:hidden absolute top-full left-0 right-0 bg-white border-b-[0.5px] border-black"
+        class="md:hidden absolute top-full left-0 right-0 bg-white border-b-[0.25px] border-black"
       >
         <ul class="py-4 space-y-4">
           <li>
@@ -125,14 +125,15 @@ const closeMenu = () => {
 
 <style scoped>
 .menu-open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(0, 0.5px);
 }
 
 .menu-open span:nth-child(2) {
   opacity: 0;
+  transform: translateX(-100%);
 }
 
 .menu-open span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(0, -0.5px);
 }
 </style>

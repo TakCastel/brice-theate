@@ -1,11 +1,11 @@
 <template>
   <footer
     id="contact"
-    class="py-16 text-gray-800"
+    class="py-16 text-gray-800 border-t-[0.25px] border-black"
     style="background-color: #f8f7f4"
   >
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <!-- Contact -->
         <div>
           <h3 class="text-lg font-normal tracking-tight mb-6">Contact</h3>
