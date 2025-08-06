@@ -1,96 +1,123 @@
 <template>
-  <div class="min-h-screen bg-white text-black">
-    <div class="max-w-screen-md mx-auto px-6 py-12">
-      <!-- En-tête -->
-      <header class="mb-16">
-        <a href="/" class="text-gray-600 hover:text-black mb-8 inline-block">
-          ← Retour
-        </a>
-        <h1 class="text-4xl font-black uppercase tracking-tight mb-4">
-          Conditions Générales de Vente
-        </h1>
-      </header>
+  <div class="min-h-screen text-black bg-white">
+    <!-- Header -->
+    <AppHeader />
 
-      <!-- Contenu -->
-      <div class="space-y-8">
-        <section class="border-2 border-black p-6">
-          <h2 class="text-2xl font-black uppercase tracking-tight mb-4">
-            Préambule
-          </h2>
-          <p class="text-lg">
-            Ce site présente le travail de Brice Théâte, scénariste. Il s'agit
-            d'un site de présentation et de portfolio. Aucune vente n'est
-            effectuée directement sur ce site.
-          </p>
-        </section>
+    <!-- Main content -->
+    <main class="pt-20">
+      <section class="py-24">
+        <div class="max-w-4xl mx-auto">
+          <h1
+            class="text-3xl md:text-4xl font-normal tracking-tight mb-16 text-center"
+          >
+            Conditions Générales de Vente
+          </h1>
 
-        <section class="border-2 border-black p-6">
-          <h2 class="text-2xl font-black uppercase tracking-tight mb-4">
-            Services proposés
-          </h2>
-          <p class="text-lg mb-4">Ce site propose :</p>
-          <ul class="text-lg list-disc list-inside space-y-2">
-            <li>Présentation du travail de Brice Théâte</li>
-            <li>Portfolio de projets cinématographiques</li>
-            <li>Informations de contact</li>
-            <li>Liens vers des contenus externes (YouTube, Vimeo)</li>
-          </ul>
-        </section>
+          <div class="space-y-8">
+            <!-- Article 1 -->
+            <div class="border-[0.5px] border-black p-8 bg-white">
+              <h2 class="text-xl font-normal mb-4 tracking-tight">
+                Article 1 - Objet
+              </h2>
+              <p class="text-gray-700 leading-relaxed">
+                Les présentes conditions générales de vente s'appliquent à
+                toutes les prestations de services conclues par Brice Théâte,
+                scénariste, auprès de ses clients professionnels et
+                particuliers, sans restriction ni réserve à tous les services
+                proposés par Brice Théâte sur son site.
+              </p>
+            </div>
 
-        <section class="border-2 border-black p-6">
-          <h2 class="text-2xl font-black uppercase tracking-tight mb-4">
-            Propriété intellectuelle
-          </h2>
-          <p class="text-lg mb-4">
-            Tous les contenus de ce site (textes, images, vidéos) sont protégés
-            par le droit d'auteur et appartiennent à Brice Théâte ou à leurs
-            auteurs respectifs.
-          </p>
-          <p class="text-lg">
-            Toute reproduction, représentation, modification, publication,
-            adaptation totale ou partielle des éléments du site, quel que soit
-            le moyen ou le procédé utilisé, est interdite, sauf autorisation
-            écrite préalable.
-          </p>
-        </section>
+            <!-- Article 2 -->
+            <div class="border-[0.5px] border-black p-8 bg-white">
+              <h2 class="text-xl font-normal mb-4 tracking-tight">
+                Article 2 - Services
+              </h2>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                Brice Théâte propose des services de scénarisation pour :
+              </p>
+              <ul
+                class="text-gray-700 leading-relaxed list-disc list-inside space-y-2"
+              >
+                <li>Courts-métrages</li>
+                <li>Longs-métrages</li>
+                <li>Documentaires</li>
+                <li>Contenus audiovisuels divers</li>
+              </ul>
+            </div>
 
-        <section class="border-2 border-black p-6">
-          <h2 class="text-2xl font-black uppercase tracking-tight mb-4">
-            Liens hypertextes
-          </h2>
-          <p class="text-lg">
-            Ce site contient des liens vers des sites externes. Ces liens sont
-            fournis à titre informatif. Brice Théâte n'exerce aucun contrôle sur
-            ces sites et décline toute responsabilité quant à leur contenu.
-          </p>
-        </section>
+            <!-- Article 3 -->
+            <div class="border-[0.5px] border-black p-8 bg-white">
+              <h2 class="text-xl font-normal mb-4 tracking-tight">
+                Article 3 - Tarifs
+              </h2>
+              <p class="text-gray-700 leading-relaxed">
+                Les tarifs sont établis en fonction de la complexité du projet,
+                de sa durée et des spécificités demandées. Un devis détaillé
+                sera établi pour chaque projet avant engagement.
+              </p>
+            </div>
 
-        <section class="border-2 border-black p-6">
-          <h2 class="text-2xl font-black uppercase tracking-tight mb-4">
-            Contact et informations
-          </h2>
-          <p class="text-lg">
-            Pour toute question concernant ce site ou le travail de Brice Théâte
-            :<br />
+            <!-- Article 4 -->
+            <div class="border-[0.5px] border-black p-8 bg-white">
+              <h2 class="text-xl font-normal mb-4 tracking-tight">
+                Article 4 - Modalités de paiement
+              </h2>
+              <p class="text-gray-700 leading-relaxed">
+                Le paiement s'effectue selon les modalités définies dans le
+                devis accepté. Un acompte de 50% est généralement demandé à la
+                commande, le solde étant dû à la livraison du projet final.
+              </p>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="border-[0.5px] border-black p-8 bg-white">
+              <h2 class="text-xl font-normal mb-4 tracking-tight">
+                Article 5 - Délais d'exécution
+              </h2>
+              <p class="text-gray-700 leading-relaxed">
+                Les délais d'exécution sont donnés à titre indicatif. Ils
+                dépendent de la complexité du projet et de la disponibilité de
+                Brice Théâte. Tout retard ne pourra donner lieu à dommages et
+                intérêts.
+              </p>
+            </div>
+
+            <!-- Article 6 -->
+            <div class="border-[0.5px] border-black p-8 bg-white">
+              <h2 class="text-xl font-normal mb-4 tracking-tight">
+                Article 6 - Propriété intellectuelle
+              </h2>
+              <p class="text-gray-700 leading-relaxed">
+                Les droits d'auteur sur les scénarios créés par Brice Théâte lui
+                appartiennent jusqu'au paiement intégral des sommes dues. La
+                cession des droits sera formalisée par un contrat spécifique.
+              </p>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div class="mt-16 text-center">
+            <p class="text-gray-700 mb-4">
+              Pour toute question concernant ces conditions générales de vente :
+            </p>
             <a
               href="mailto:theatebrice@gmail.com"
-              class="text-blue-600 hover:text-blue-800"
+              class="inline-block bg-black text-white px-6 py-3 font-normal tracking-wider hover:bg-gray-800 transition-colors"
             >
               theatebrice@gmail.com
             </a>
-          </p>
-        </section>
+          </div>
+        </div>
+      </section>
+    </main>
 
-        <section class="border-2 border-black p-6">
-          <h2 class="text-2xl font-black uppercase tracking-tight mb-4">
-            Droit applicable
-          </h2>
-          <p class="text-lg">
-            Les présentes conditions sont soumises au droit français. En cas de
-            litige, les tribunaux français seront seuls compétents.
-          </p>
-        </section>
-      </div>
-    </div>
+    <!-- Footer -->
+    <AppFooter />
   </div>
 </template>
+
+<script setup>
+import AppHeader from "~/components/AppHeader.vue";
+import AppFooter from "~/components/AppFooter.vue";
+</script>

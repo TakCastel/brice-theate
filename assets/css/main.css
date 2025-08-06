@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Police Work Sans globale */
+html {
+  font-family: "Work Sans", sans-serif;
+  font-size: 80%;
+}
+
+/* Styles PhotoSwipe personnalisés */
+.pswp__custom-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.pswp__custom-caption-text {
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+}
+
 /* Animations kitsch */
 @keyframes float {
   0%,

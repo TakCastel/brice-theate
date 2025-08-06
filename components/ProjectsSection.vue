@@ -1,18 +1,24 @@
 <template>
-  <section id="scripts" class="py-24 px-6">
+  <section
+    id="scripts"
+    class="projects-section sticky top-0 min-h-screen py-24 bg-white z-10 border-t-[0.5px] border-black flex items-center justify-center"
+  >
     <div class="max-w-4xl mx-auto">
-      <h2
-        class="text-3xl md:text-4xl font-black uppercase tracking-tight mb-16 text-center"
-      >
-        Scripts
-      </h2>
+      <div>
+        <h2
+          class="section-title text-3xl md:text-4xl font-normal tracking-tight mb-16 text-center animate-on-scroll"
+        >
+          Scénarios
+        </h2>
 
-      <div class="space-y-16 flex flex-col items-center">
-        <ProjectCard
-          v-for="script in scripts"
-          :key="script.title"
-          :project="script"
-        />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <ProjectCard
+            v-for="(script, index) in scripts"
+            :key="script.title"
+            :project="script"
+            :class="`animate-on-scroll stagger-${index + 1}`"
+          />
+        </div>
       </div>
     </div>
   </section>

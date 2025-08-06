@@ -1,35 +1,31 @@
 <template>
-  <div
-    class="w-4/5 h-96 mx-auto text-center border border-black p-12 bg-white flex flex-col items-center justify-center"
-  >
-    <div class="typewriter-container">
-      <h1
-        class="text-5xl md:text-7xl font-black uppercase tracking-tight mb-6 h-20 flex items-center justify-center"
+  <div class="typewriter-container">
+    <h1
+      class="text-5xl md:text-7xl font-normal uppercase tracking-tight mb-6 h-20 flex items-center justify-center"
+    >
+      <span
+        v-for="(letter, index) in titleLetters"
+        :key="index"
+        class="letter"
+        :style="{ opacity: letter.visible ? 1 : 0 }"
       >
-        <span
-          v-for="(letter, index) in titleLetters"
-          :key="index"
-          class="letter"
-          :style="{ opacity: letter.visible ? 1 : 0 }"
-        >
-          {{ letter.char }}
-        </span>
-        <span class="cursor">|</span>
-      </h1>
-      <p
-        class="text-xl md:text-2xl font-bold uppercase tracking-wider text-gray-600 mb-12 h-8 flex items-center justify-center"
+        {{ letter.char }}
+      </span>
+      <span class="cursor">|</span>
+    </h1>
+    <p
+      class="text-xl md:text-2xl font-normal uppercase tracking-wider text-gray-600 mb-12 h-8 flex items-center justify-center"
+    >
+      <span
+        v-for="(letter, index) in subtitleLetters"
+        :key="index"
+        class="letter"
+        :style="{ opacity: letter.visible ? 1 : 0 }"
       >
-        <span
-          v-for="(letter, index) in subtitleLetters"
-          :key="index"
-          class="letter"
-          :style="{ opacity: letter.visible ? 1 : 0 }"
-        >
-          {{ letter.char }}
-        </span>
-      </p>
-      <div class="w-24 h-px bg-black mx-auto"></div>
-    </div>
+        {{ letter.char }}
+      </span>
+    </p>
+    <div class="w-24 h-px bg-black mx-auto"></div>
   </div>
 </template>
 

@@ -27,7 +27,6 @@ brice-theate/
 │   ├── index.vue       # Page principale
 │   ├── mentions-legales.vue
 │   ├── politique-confidentialite.vue
-│   └── cgv.vue
 ├── public/             # Assets statiques
 │   └── images/         # Images du site
 ├── assets/             # Assets compilés

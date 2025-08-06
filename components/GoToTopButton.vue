@@ -1,7 +1,7 @@
 <template>
   <button
     id="goToTop"
-    class="fixed bottom-8 right-8 z-40 bg-black text-white p-4 border border-black shadow-lg hover:bg-gray-800 transition-all duration-300 opacity-0 pointer-events-none"
+    class="fixed bottom-8 right-8 z-40 bg-black text-white p-4 border-[0.5px] border-black shadow-lg hover:bg-gray-800 transition-all duration-300 opacity-0 pointer-events-none"
     @click="scrollToTop"
   >
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

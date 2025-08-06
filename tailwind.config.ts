@@ -11,7 +11,11 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Work Sans", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 } satisfies Config;

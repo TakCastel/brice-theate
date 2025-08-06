@@ -1,0 +1,150 @@
+/* Animations CSS pures */
+
+/* Fade-in général */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in avec délai */
+@keyframes fadeInDelayed {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation pour les titres */
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animation pour les cartes */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animation pour les images */
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Animation pour les boutons */
+@keyframes buttonSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Classes d'animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.fade-in-delayed {
+  animation: fadeInDelayed 1s ease-out forwards;
+}
+
+.title-fade-in {
+  animation: titleFadeIn 0.8s ease-out forwards;
+}
+
+.card-fade-in {
+  animation: cardFadeIn 0.8s ease-out forwards;
+}
+
+.image-fade-in {
+  animation: imageFadeIn 0.8s ease-out forwards;
+}
+
+.button-slide-in {
+  animation: buttonSlideIn 0.6s ease-out forwards;
+}
+
+/* Stagger pour les listes */
+.stagger-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Animation au scroll avec Intersection Observer */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Délais pour les éléments en liste */
+.animate-on-scroll.stagger-1 {
+  transition-delay: 0.1s;
+}
+.animate-on-scroll.stagger-2 {
+  transition-delay: 0.2s;
+}
+.animate-on-scroll.stagger-3 {
+  transition-delay: 0.3s;
+}
+.animate-on-scroll.stagger-4 {
+  transition-delay: 0.4s;
+}
+.animate-on-scroll.stagger-5 {
+  transition-delay: 0.5s;
+}
+.animate-on-scroll.stagger-6 {
+  transition-delay: 0.6s;
+}
