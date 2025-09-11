@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/icon"],
   css: ["~/assets/css/main.css"],
   app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/brice-theate/' : '/',
     head: {
       link: [
         {

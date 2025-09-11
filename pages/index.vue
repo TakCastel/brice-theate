@@ -3,23 +3,38 @@
     <!-- Header -->
     <AppHeader />
 
-    <!-- Main content -->
-    <main class="pt-20">
-      <!-- Hero Section -->
-      <HeroSection />
+    <!-- Main horizontal container -->
+    <main class="horizontal-container pt-20 h-screen overflow-x-auto overflow-y-hidden">
+      <div class="horizontal-sections flex h-full">
+        <!-- Hero Section -->
+        <div class="section-page w-screen h-full flex-shrink-0">
+          <HeroSection />
+        </div>
 
-      <!-- Section Biographie -->
-      <BiographySection />
+        <!-- Section Biographie -->
+        <div class="section-page w-screen h-full flex-shrink-0">
+          <BiographySection />
+        </div>
 
-      <!-- Section Approche créative -->
-      <CreativeApproachSection />
+        <!-- Section Approche créative -->
+        <div class="section-page w-screen h-full flex-shrink-0">
+          <CreativeApproachSection />
+        </div>
 
-      <!-- Projets -->
-      <ProjectsSection />
+        <!-- Projets -->
+        <div class="section-page w-screen h-full flex-shrink-0">
+          <ProjectsSection />
+        </div>
 
-      <!-- Contact -->
-      <ContactSection />
+        <!-- Contact -->
+        <div class="section-page w-screen h-full flex-shrink-0">
+          <ContactSection />
+        </div>
+      </div>
     </main>
+
+    <!-- Indicateurs de navigation horizontale -->
+    <HorizontalNavIndicator />
 
     <!-- Footer -->
     <AppFooter />
@@ -34,6 +49,7 @@ import CreativeApproachSection from "~/components/CreativeApproachSection.vue";
 import ProjectsSection from "~/components/ProjectsSection.vue";
 import ContactSection from "~/components/ContactSection.vue";
 import AppFooter from "~/components/AppFooter.vue";
+import HorizontalNavIndicator from "~/components/HorizontalNavIndicator.vue";
 
 // Intersection Observer pour les animations au scroll
 onMounted(() => {
@@ -60,4 +76,48 @@ onMounted(() => {
 
 <style>
 @import "~/assets/css/animations.css";
+
+/* Scroll horizontal avec snap points */
+.horizontal-container {
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.section-page {
+  scroll-snap-align: start;
+}
+
+/* Masquer la scrollbar tout en gardant la fonctionnalité */
+.horizontal-container::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-container {
+  -ms-overflow-style: none;  /* IE et Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Responsive: sur mobile, on revient au scroll vertical */
+@media (max-width: 768px) {
+  .horizontal-container {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .horizontal-sections {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .section-page {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+  }
+  
+  .horizontal-container {
+    scroll-snap-type: y mandatory;
+  }
+}
 </style>

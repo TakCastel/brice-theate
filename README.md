@@ -1,74 +1,41 @@
-# Brice Théâte - Site Portfolio
+# Brice Théâte - Portfolio
 
-Site portfolio minimaliste pour Brice Théâte, scénariste, développé avec Nuxt 3 et Tailwind CSS.
+Site portfolio de Brice Théâte, scénariste, développé avec Nuxt 3 et Tailwind CSS.
 
-## 🚀 Technologies
+## 🚀 Déploiement
 
-- **Nuxt 3** - Framework Vue.js
-- **Tailwind CSS** - Framework CSS utilitaire
-- **GSAP** - Animations JavaScript
-- **Nuxt Icon** - Icônes
+Le site est automatiquement déployé sur GitHub Pages à chaque push sur la branche `main`.
 
-## 📁 Structure
+### URL de production
+https://takcastel.github.io/brice-theate/
 
-```
-brice-theate/
-├── components/          # Composants Vue
-│   ├── AppHeader.vue
-│   ├── HeroSection.vue
-│   ├── HeroTitle.vue
-│   ├── BiographySection.vue
-│   ├── CreativeApproachSection.vue
-│   ├── ProjectsSection.vue
-│   ├── ProjectCard.vue
-│   ├── ContactSection.vue
-│   └── AppFooter.vue
-├── pages/              # Pages de l'application
-│   ├── index.vue       # Page principale
-│   ├── mentions-legales.vue
-│   ├── politique-confidentialite.vue
-├── public/             # Assets statiques
-│   └── images/         # Images du site
-├── assets/             # Assets compilés
-│   └── css/
-│       └── main.css    # Styles Tailwind
-└── nuxt.config.ts      # Configuration Nuxt
-```
+## 🛠️ Développement
 
-## 🎨 Sections
-
-- **Hero Section** - Titre principal avec animation typewriter
-- **Biographie** - Présentation de Brice Théâte
-- **Approche créative** - Processus d'écriture et influences
-- **Scripts** - Portfolio des projets avec images volantes
-- **Contact** - Informations de contact
-
-## 🛠️ Installation
-
+### Installation
 ```bash
-# Installer les dépendances
 npm install
+```
 
-# Démarrer le serveur de développement
+### Démarrage en local
+```bash
 npm run dev
+```
 
-# Build pour la production
+### Build pour production
+```bash
 npm run build
 ```
 
-## 🎯 Fonctionnalités
+## 📁 Structure
 
-- Design brutaliste et épuré
-- Animation typewriter avec GSAP
-- Images volantes sur les cards de projets
-- Responsive design
-- Navigation fluide
-- Effet parallax sur les images de fond
+- `components/` - Composants Vue.js
+- `pages/` - Pages de l'application
+- `assets/` - Ressources statiques
+- `public/` - Fichiers publics (images, favicon)
 
-## 📧 Contact
+## 🎨 Technologies
 
-Brice Théâte - theatebrice@gmail.com
-
-## 📄 Licence
-
-Tous droits réservés © 2024 Brice Théâte
+- **Nuxt 3** - Framework Vue.js
+- **Tailwind CSS** - Framework CSS
+- **GSAP** - Animations
+- **GitHub Pages** - Hébergement

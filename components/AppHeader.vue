@@ -30,19 +30,37 @@
             </li>
             <li>
               <a
+                @click.prevent="scrollToSection('biographie')"
                 href="#biographie"
-                class="hover:text-gray-600 transition-colors"
+                class="hover:text-gray-600 transition-colors cursor-pointer"
               >
                 Biographie
               </a>
             </li>
             <li>
-              <a href="#scripts" class="hover:text-gray-600 transition-colors">
+              <a
+                @click.prevent="scrollToSection('creative')"
+                href="#creative"
+                class="hover:text-gray-600 transition-colors cursor-pointer"
+              >
+                Approche
+              </a>
+            </li>
+            <li>
+              <a 
+                @click.prevent="scrollToSection('scripts')"
+                href="#scripts" 
+                class="hover:text-gray-600 transition-colors cursor-pointer"
+              >
                 Scénarios
               </a>
             </li>
             <li>
-              <a href="#contact" class="hover:text-gray-600 transition-colors">
+              <a 
+                @click.prevent="scrollToSection('contact')"
+                href="#contact" 
+                class="hover:text-gray-600 transition-colors cursor-pointer"
+              >
                 Contact
               </a>
             </li>
@@ -78,27 +96,36 @@
           </li>
           <li>
             <a
+              @click.prevent="scrollToSection('biographie'); closeMenu()"
               href="#biographie"
-              @click="closeMenu"
-              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors"
+              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Biographie
             </a>
           </li>
           <li>
             <a
+              @click.prevent="scrollToSection('creative'); closeMenu()"
+              href="#creative"
+              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors cursor-pointer"
+            >
+              Approche
+            </a>
+          </li>
+          <li>
+            <a
+              @click.prevent="scrollToSection('scripts'); closeMenu()"
               href="#scripts"
-              @click="closeMenu"
-              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors"
+              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Scripts
             </a>
           </li>
           <li>
             <a
+              @click.prevent="scrollToSection('contact'); closeMenu()"
               href="#contact"
-              @click="closeMenu"
-              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors"
+              class="block px-6 py-2 text-sm font-normal uppercase tracking-wider hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Contact
             </a>
@@ -111,6 +138,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useScrollToSection } from "~/composables/useScrollToSection";
+
+const { scrollToSection } = useScrollToSection();
 
 const isMenuOpen = ref(false);
 

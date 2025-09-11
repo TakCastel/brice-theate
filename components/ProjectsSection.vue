@@ -1,7 +1,7 @@
 <template>
   <section
     id="scripts"
-    class="projects-section sticky top-0 min-h-screen py-24 bg-white z-10 border-t-[0.25px] border-black flex items-center justify-center"
+    class="projects-section h-full w-full py-24 bg-white z-10 border-l-[0.25px] border-black flex items-center justify-center"
   >
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <div>
