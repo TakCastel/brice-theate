@@ -18,7 +18,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           <!-- Processus d'écriture -->
           <div
-            class="creative-content bg-white p-8 border-[0.25px] border-black animate-on-scroll stagger-item"
+            class="creative-content vintage-card-border p-8 animate-on-scroll stagger-item"
           >
             <h3
               class="section-title text-xl font-normal mb-4 tracking-tight animate-on-scroll stagger-1"
@@ -37,7 +37,7 @@
 
           <!-- Influences -->
           <div
-            class="creative-content bg-white p-8 border-[0.25px] border-black animate-on-scroll stagger-item"
+            class="creative-content enhanced-card-border p-8 animate-on-scroll stagger-item"
           >
             <h3
               class="section-title text-xl font-normal mb-4 tracking-tight animate-on-scroll stagger-1"
@@ -56,7 +56,7 @@
 
           <!-- Collaborations -->
           <div
-            class="creative-content bg-white p-8 border-[0.25px] border-black animate-on-scroll stagger-item"
+            class="creative-content modern-card-border p-8 animate-on-scroll stagger-item"
           >
             <h3
               class="section-title text-xl font-normal mb-4 tracking-tight animate-on-scroll stagger-1"

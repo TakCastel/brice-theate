@@ -22,8 +22,11 @@
 
         <!-- Contenu biographie -->
         <div
-          class="biography-content border-[0.25px] border-black p-8 bg-white animate-on-scroll order-1 lg:order-2"
+          class="biography-content decorative-card-border p-8 animate-on-scroll order-1 lg:order-2"
         >
+          <!-- Coins décoratifs supplémentaires -->
+          <div class="corner-top-right"></div>
+          <div class="corner-bottom-left"></div>
           <h2
             class="section-title text-3xl md:text-4xl font-normal tracking-tight mb-8 animate-on-scroll stagger-1"
           >
