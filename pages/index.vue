@@ -56,7 +56,7 @@ let currentSectionIndex = ref(0);
 let lastSectionBeforeFooter = 0; // Sauvegarde de la section avant d'aller au footer
 let isScrolling = false;
 let isFooterScrollMode = ref(false);
-const SCROLL_DEBOUNCE = 600; // Délai en ms entre les scrolls (réduit pour plus de fluidité)
+const SCROLL_DEBOUNCE = 400; // Délai en ms entre les scrolls (optimisé pour trackpad Mac)
 let navigationTimeout = null;
 
 // Variable pour éviter les appels récursifs
@@ -122,15 +122,28 @@ const setupWheelNavigation = () => {
   
   if (!horizontalContainer || !sections.length) return;
 
-  // Variable pour détecter si l'utilisateur utilise le touch
+  // Variables pour détecter le type de périphérique et optimiser l'expérience
   let isUsingTouch = false;
+  let isMacTrackpad = false;
+  
+  // Détecter si c'est un trackpad Mac (approximation basée sur les déltas)
+  let wheelEventCount = 0;
+  const detectMacTrackpad = (e) => {
+    wheelEventCount++;
+    if (wheelEventCount < 5) return; // Attendre quelques événements pour analyser
+    
+    // Les trackpads Mac génèrent souvent des valeurs de deltaY plus petites et plus fréquentes
+    if (Math.abs(e.deltaY) < 10 && e.deltaMode === 0) {
+      isMacTrackpad = true;
+    }
+  };
   
   // Détecter l'utilisation du touch pour désactiver temporairement la navigation wheel
   const handleTouchStart = () => {
     isUsingTouch = true;
     setTimeout(() => {
       isUsingTouch = false;
-    }, 500); // Reset après 500ms sans touch
+    }, 300); // Réduit pour plus de réactivité
   };
   
   document.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -155,6 +168,9 @@ const setupWheelNavigation = () => {
   });
 
   const handleWheel = (e) => {
+    // Détecter le type de trackpad pour les premiers événements
+    detectMacTrackpad(e);
+    
     // Éviter les scrolls trop rapides
     if (isScrolling) {
       e.preventDefault();
@@ -167,22 +183,22 @@ const setupWheelNavigation = () => {
     }
 
     // Protection contre les gestes de swipe horizontaux sur trackpad
-    // Les utilisateurs peuvent instinctivement essayer de swiper gauche/droite
-    // mais cela génère des événements wheel avec deltaX qui peuvent perturber la navigation
     const deltaX = Math.abs(e.deltaX);
     const deltaY = Math.abs(e.deltaY);
     
-    // Si le mouvement horizontal domine (swipe gauche/droite), on l'ignore
-    // Seuil de 10px pour éviter les faux positifs sur les mouvements diagonaux légers
-    if (deltaX > deltaY && deltaX > 10) {
-      // C'est un swipe horizontal intentionnel, on l'ignore pour éviter les bugs
+    // Ajuster les seuils selon le type de périphérique
+    const horizontalThreshold = isMacTrackpad ? 20 : 15;
+    const verticalThreshold = isMacTrackpad ? 1 : 2;
+    
+    // Détecter si c'est un geste purement horizontal (swipe gauche/droite intentionnel)
+    if (deltaX > 0 && deltaY === 0 && deltaX > horizontalThreshold) {
+      // C'est un swipe horizontal pur, on l'ignore complètement
       e.preventDefault();
       return;
     }
     
-    // Ignorer les mouvements verticaux trop faibles (tremblements, micro-mouvements)
-    // Seuil de 5px pour filtrer les gestes involontaires
-    if (deltaY < 5) {
+    // Pour les trackpads Mac, être plus tolérant avec les petits mouvements
+    if (deltaY < verticalThreshold) {
       return;
     }
 

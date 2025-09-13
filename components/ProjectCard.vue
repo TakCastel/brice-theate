@@ -48,33 +48,6 @@
       </p>
     </div>
 
-    <!-- Informations supplémentaires -->
-    <div class="space-y-2">
-      <div
-        v-if="project.genre"
-        class="text-line text-xs text-gray-600 animate-on-scroll stagger-5"
-      >
-        <span class="font-medium">Genre :</span> {{ project.genre }}
-      </div>
-      <div
-        v-if="project.format"
-        class="text-line text-xs text-gray-600 animate-on-scroll stagger-6"
-      >
-        <span class="font-medium">Format :</span> {{ project.format }}
-      </div>
-      <div
-        v-if="project.production"
-        class="text-line text-xs text-gray-600 animate-on-scroll stagger-7"
-      >
-        <span class="font-medium">Production :</span> {{ project.production }}
-      </div>
-      <div
-        v-if="project.status"
-        class="text-line text-xs text-gray-600 animate-on-scroll stagger-8"
-      >
-        <span class="font-medium">Statut :</span> {{ project.status }}
-      </div>
-    </div>
 
     <!-- Actions optionnelles -->
     <div v-if="project.links && project.links.length > 0" class="mt-4 pt-4 border-t border-gray-200">
@@ -85,7 +58,7 @@
           :href="link.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-xs px-3 py-1 border border-gray-300 text-gray-700 hover:border-black hover:text-black transition-colors animate-on-scroll stagger-9"
+          class="text-xs px-3 py-1 border border-gray-300 text-gray-700 hover:border-black hover:text-black transition-colors animate-on-scroll stagger-5"
           @click="trackProjectLink(link.title)"
         >
           {{ link.title }}
@@ -95,7 +68,7 @@
 
     <!-- Note de bas de card -->
     <div v-if="project.note" class="mt-4 pt-3 border-t border-gray-100">
-      <p class="text-xs text-gray-500 italic animate-on-scroll stagger-10">
+      <p class="text-xs text-gray-500 italic animate-on-scroll stagger-6">
         {{ project.note }}
       </p>
     </div>
