@@ -59,10 +59,20 @@ let isFooterScrollMode = ref(false);
 const SCROLL_DEBOUNCE = 600; // Délai en ms entre les scrolls (réduit pour plus de fluidité)
 let navigationTimeout = null;
 
+// Variable pour éviter les appels récursifs
+let isHandlingHashNavigation = false;
+
 // Gérer la navigation depuis une ancre URL
 const handleHashNavigation = () => {
+  // Éviter les appels récursifs
+  if (isHandlingHashNavigation) {
+    return;
+  }
+  
   const hash = window.location.hash.substring(1); // Enlever le #
   if (hash) {
+    isHandlingHashNavigation = true;
+    
     // S'assurer qu'on reste en haut de la page d'abord
     window.scrollTo(0, 0);
     
@@ -86,6 +96,11 @@ const handleHashNavigation = () => {
       scrollToSection(hash);
       // Nettoyer l'ancre pour éviter les conflits futurs
       history.replaceState(null, null, window.location.pathname);
+      
+      // Libérer le verrou après un délai
+      setTimeout(() => {
+        isHandlingHashNavigation = false;
+      }, 1000);
     }, 200);
   }
 };
