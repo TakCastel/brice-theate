@@ -2,8 +2,8 @@
   <footer
     id="contact"
     :class="[
-      'py-16 text-gray-800',
-      showTopBorder ? 'border-t-[0.25px] border-black' : ''
+      'py-16 text-gray-800 border-t-[0.25px] border-black md:border-t-0',
+      showTopBorderDesktop ? 'md:border-t-[0.25px] md:border-black' : ''
     ]"
     style="background-color: #f8f7f4"
   >
@@ -99,13 +99,14 @@
 </template>
 
 <script setup>
-// Détecter si on doit afficher la bordure en haut
-// (uniquement sur les pages statiques, pas sur l'index)
-const showTopBorder = computed(() => {
-  // Vérifier si on est côté client et si ce n'est pas la page d'accueil
+// Détecter si on doit afficher la bordure en haut sur desktop
+// Seulement sur les pages mentions légales et politique de confidentialité
+const showTopBorderDesktop = computed(() => {
   if (process.client) {
-    return window.location.pathname !== '/';
+    const pathname = window.location.pathname;
+    return pathname === '/mentions-legales' || pathname === '/politique-confidentialite';
   }
   return false;
 });
 </script>
+

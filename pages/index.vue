@@ -28,7 +28,7 @@
 
     <!-- Barre de navigation vers footer -->
     <div 
-      class="footer-scroll-bar absolute bottom-0 left-0 right-0 h-16 z-10 border-t-[0.25px] border-black transition-all duration-300"
+      class="footer-scroll-bar absolute bottom-0 left-0 right-0 h-16 z-10 border-t-[0.25px] border-black transition-all duration-300 hidden md:block"
       style="background-color: #f8f7f4"
       @mouseenter="enableFooterScrollMode"
       @mouseleave="disableFooterScrollMode"
@@ -52,11 +52,12 @@ import HorizontalNavIndicator from "~/components/HorizontalNavIndicator.vue";
 import { useScrollToSection } from "~/composables/useScrollToSection";
 
 // Variables pour la navigation au scroll
-let currentSectionIndex = 0;
+let currentSectionIndex = ref(0);
 let lastSectionBeforeFooter = 0; // Sauvegarde de la section avant d'aller au footer
 let isScrolling = false;
 let isFooterScrollMode = ref(false);
-const SCROLL_DEBOUNCE = 800; // Délai en ms entre les scrolls
+const SCROLL_DEBOUNCE = 600; // Délai en ms entre les scrolls (réduit pour plus de fluidité)
+let navigationTimeout = null;
 
 // Gérer la navigation depuis une ancre URL
 const handleHashNavigation = () => {
@@ -75,8 +76,8 @@ const handleHashNavigation = () => {
     };
     
     if (sectionPositions.hasOwnProperty(hash)) {
-      currentSectionIndex = sectionPositions[hash];
-      lastSectionBeforeFooter = currentSectionIndex;
+      currentSectionIndex.value = sectionPositions[hash];
+      lastSectionBeforeFooter = currentSectionIndex.value;
     }
     
     // Attendre que le DOM soit prêt et que la page soit stabilisée
@@ -89,32 +90,13 @@ const handleHashNavigation = () => {
   }
 };
 
-// Intersection Observer pour les animations au scroll
+// Navigation et gestion des événements
 onMounted(() => {
   // Gérer la navigation depuis l'URL avec ancre
   handleHashNavigation();
   
   // Écouter les changements d'ancre
   window.addEventListener('hashchange', handleHashNavigation);
-  
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    }
-  );
-
-  // Observer tous les éléments avec la classe animate-on-scroll
-  document.querySelectorAll(".animate-on-scroll").forEach((el) => {
-    observer.observe(el);
-  });
 
   // Navigation au scroll avec la molette
   setupWheelNavigation();
@@ -126,6 +108,25 @@ const setupWheelNavigation = () => {
   const footer = document.querySelector('footer');
   
   if (!horizontalContainer || !sections.length) return;
+
+  // Fonction pour détecter la section actuelle basée sur la position de scroll
+  const updateCurrentSection = () => {
+    const scrollLeft = horizontalContainer.scrollLeft;
+    const sectionWidth = window.innerWidth;
+    const newIndex = Math.round(scrollLeft / sectionWidth);
+    
+    if (newIndex !== currentSectionIndex.value && newIndex >= 0 && newIndex < sections.length) {
+      currentSectionIndex.value = newIndex;
+      lastSectionBeforeFooter = newIndex;
+    }
+  };
+
+  // Écouter les changements de scroll pour mettre à jour la position
+  let scrollTimeout;
+  horizontalContainer.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(updateCurrentSection, 100);
+  });
 
   const handleWheel = (e) => {
     // Éviter les scrolls trop rapides
@@ -142,7 +143,7 @@ const setupWheelNavigation = () => {
       if (deltaY > 0) {
         // Scroll vers le bas -> aller au footer
         if (window.pageYOffset === 0) {
-          lastSectionBeforeFooter = currentSectionIndex; // Sauvegarder la section actuelle
+          lastSectionBeforeFooter = currentSectionIndex.value; // Sauvegarder la section actuelle
           scrollToFooter();
         }
       } else {
@@ -161,15 +162,15 @@ const setupWheelNavigation = () => {
 
     // Navigation vers la droite (scroll vers le bas)
     if (isScrollingDown) {
-      if (currentSectionIndex < sections.length - 1) {
+      if (currentSectionIndex.value < sections.length - 1) {
         e.preventDefault();
-        currentSectionIndex++;
-        lastSectionBeforeFooter = currentSectionIndex; // Sauvegarder la section actuelle
-        scrollToSection(currentSectionIndex);
-      } else if (currentSectionIndex === sections.length - 1) {
+        currentSectionIndex.value++;
+        lastSectionBeforeFooter = currentSectionIndex.value; // Sauvegarder la section actuelle
+        scrollToSection(currentSectionIndex.value);
+      } else if (currentSectionIndex.value === sections.length - 1) {
         // À la dernière section, scroll vers le footer
         e.preventDefault();
-        lastSectionBeforeFooter = currentSectionIndex; // Sauvegarder la section actuelle
+        lastSectionBeforeFooter = currentSectionIndex.value; // Sauvegarder la section actuelle
         scrollToFooter();
       }
     }
@@ -179,26 +180,39 @@ const setupWheelNavigation = () => {
       if (window.pageYOffset > 0) {
         e.preventDefault();
         scrollBackFromFooter();
-      } else if (currentSectionIndex > 0) {
+      } else if (currentSectionIndex.value > 0) {
         e.preventDefault();
-        currentSectionIndex--;
-        lastSectionBeforeFooter = currentSectionIndex; // Sauvegarder la section actuelle
-        scrollToSection(currentSectionIndex);
+        currentSectionIndex.value--;
+        lastSectionBeforeFooter = currentSectionIndex.value; // Sauvegarder la section actuelle
+        scrollToSection(currentSectionIndex.value);
       }
     }
   };
 
   const scrollToSection = (index) => {
+    if (isScrolling) return;
+    
     isScrolling = true;
     const targetScrollLeft = index * window.innerWidth;
+    
+    // Annuler tout timeout de navigation précédent
+    if (navigationTimeout) {
+      clearTimeout(navigationTimeout);
+    }
     
     horizontalContainer.scrollTo({
       left: targetScrollLeft,
       behavior: 'smooth'
     });
 
-    setTimeout(() => {
+    navigationTimeout = setTimeout(() => {
       isScrolling = false;
+      // Vérifier et corriger la position finale
+      const actualIndex = Math.round(horizontalContainer.scrollLeft / window.innerWidth);
+      if (actualIndex !== currentSectionIndex.value) {
+        currentSectionIndex.value = actualIndex;
+        lastSectionBeforeFooter = actualIndex;
+      }
     }, SCROLL_DEBOUNCE);
   };
 
@@ -217,8 +231,10 @@ const setupWheelNavigation = () => {
   };
 
   const scrollBackFromFooter = () => {
+    if (isScrolling) return;
+    
     isScrolling = true;
-    currentSectionIndex = lastSectionBeforeFooter; // Revenir à la section sauvegardée
+    currentSectionIndex.value = lastSectionBeforeFooter; // Revenir à la section sauvegardée
     
     // Revenir en haut de page et à la dernière section affichée
     window.scrollTo({
@@ -227,7 +243,7 @@ const setupWheelNavigation = () => {
     });
 
     setTimeout(() => {
-      const targetScrollLeft = currentSectionIndex * window.innerWidth;
+      const targetScrollLeft = currentSectionIndex.value * window.innerWidth;
       horizontalContainer.scrollTo({
         left: targetScrollLeft,
         behavior: 'smooth'
@@ -308,7 +324,8 @@ const disableFooterScrollMode = () => {
   
   .section-page {
     width: 100vw;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     scroll-snap-align: start;
     border-right: none;
     border-left: none;

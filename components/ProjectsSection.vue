@@ -31,29 +31,53 @@ const scripts = [
   {
     title: "Tel esprit qui croyait prendre",
     year: "2025",
-    description: "L'histoire d'une session de spiritisme",
+    synopsis: "L'histoire d'une session de spiritisme qui tourne mal quand les participants réalisent qu'ils ont invoqué plus qu'ils ne l'avaient prévu.",
     image: "/images/tel-esprit-qui-croyait-prendre.jpg",
+    genre: "Thriller/Comédie",
+    format: "Court métrage",
+    status: "Terminé",
+    production: "Collectif Kino"
   },
   {
     title: "Belître",
     year: "Avril 2024",
-    description: "Court métrage - Histoire d'un robot IA qui pète un plomb",
+    synopsis: "Court métrage - Histoire d'un robot IA qui pète un plomb et découvre les joies et les peines de l'humanité de la pire des façons.",
     image: "/images/belitre.jpg",
+    genre: "Science-fiction/Comédie",
+    format: "Court métrage",
+    status: "Terminé",
+    production: "Collectif Kino"
   },
   {
     title: "Pour une poignée de fromage",
     year: "2023",
-    description: "Western fromager absurde",
-    duration: "4:17",
-    link: "https://www.youtube.com/watch?v=JxgDb3LFVfU",
+    synopsis: "Western fromager absurde où deux cow-boys se battent pour la dernière meule de comté dans un Far West décalé.",
+    genre: "Western/Comédie",
+    format: "Court métrage - 4:17",
+    status: "Terminé",
+    production: "Collectif Kino",
+    links: [
+      {
+        title: "Voir sur YouTube",
+        url: "https://www.youtube.com/watch?v=JxgDb3LFVfU"
+      }
+    ]
   },
   {
     title: "La goutte de trop",
     year: "2022",
-    description: "Parodie de comédie romantique",
-    duration: "5:12",
-    link: "https://www.youtube.com/watch?v=tOCUrUkwJyA",
+    synopsis: "Parodie de comédie romantique où une histoire d'amour banale devient complètement absurde à cause d'un détail insignifiant.",
     image: "/images/la-goutte-de-trop.jpg",
+    genre: "Comédie romantique/Parodie",
+    format: "Court métrage - 5:12",
+    status: "Terminé",
+    production: "Collectif Kino",
+    links: [
+      {
+        title: "Voir sur YouTube",
+        url: "https://www.youtube.com/watch?v=tOCUrUkwJyA"
+      }
+    ]
   },
 ];
 </script>

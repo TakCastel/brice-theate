@@ -9,15 +9,12 @@
         <div class="biography-photo order-2 lg:order-1 animate-on-scroll">
           <div class="aspect-square w-full max-w-md mx-auto lg:mx-0">
             <img
-              src="https://picsum.photos/400/400?random=1&grayscale"
+              src="/images/brice-theate-profile.jpg"
               alt="Photo de Brice Théâte"
-              class="w-full h-full object-cover border-[0.25px] border-black bg-gray-200"
+              class="w-full h-full object-cover border-[0.25px] border-black bg-gray-200 filter grayscale"
               loading="lazy"
             />
           </div>
-          <p class="text-center text-sm text-gray-500 mt-2">
-            Photo temporaire - À remplacer
-          </p>
         </div>
 
         <!-- Contenu biographie -->
