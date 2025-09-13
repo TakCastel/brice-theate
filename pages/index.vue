@@ -122,19 +122,55 @@ const setupWheelNavigation = () => {
   
   if (!horizontalContainer || !sections.length) return;
 
-  // Variables pour détecter le type de périphérique et optimiser l'expérience
+  // Variables pour détecter le type de périphérique et adapter le comportement
   let isUsingTouch = false;
-  let isMacTrackpad = false;
-  
-  // Détecter si c'est un trackpad Mac (approximation basée sur les déltas)
+  let isTrackpad = false;
+  let isMouseWheel = false;
+  let lastWheelTime = 0;
   let wheelEventCount = 0;
-  const detectMacTrackpad = (e) => {
+  
+  // Détecter si c'est un trackpad ou une molette de souris
+  const detectInputDevice = (e) => {
     wheelEventCount++;
-    if (wheelEventCount < 5) return; // Attendre quelques événements pour analyser
+    const now = Date.now();
+    const timeDiff = now - lastWheelTime;
+    lastWheelTime = now;
     
-    // Les trackpads Mac génèrent souvent des valeurs de deltaY plus petites et plus fréquentes
-    if (Math.abs(e.deltaY) < 10 && e.deltaMode === 0) {
-      isMacTrackpad = true;
+    // Les trackpads génèrent des événements plus fréquents et avec des deltaY plus petits
+    // Les molettes génèrent des événements moins fréquents avec des deltaY plus gros
+    if (wheelEventCount > 3) {
+      const wasTrackpad = isTrackpad;
+      const wasMouseWheel = isMouseWheel;
+      
+      if (timeDiff < 50 && Math.abs(e.deltaY) < 50 && e.deltaMode === 0) {
+        isTrackpad = true;
+        isMouseWheel = false;
+      } else if (timeDiff > 100 && Math.abs(e.deltaY) > 50) {
+        isMouseWheel = true;
+        isTrackpad = false;
+      }
+      
+      // Si le périphérique a changé, ajuster le CSS
+      if ((wasTrackpad !== isTrackpad) || (wasMouseWheel !== isMouseWheel)) {
+        updateScrollBehavior();
+      }
+    }
+  };
+  
+  // Ajuster le comportement de scroll selon le périphérique
+  const updateScrollBehavior = () => {
+    if (isTrackpad) {
+      // Pour trackpad : pas de snap automatique, scroll libre
+      horizontalContainer.style.scrollSnapType = 'none';
+      sections.forEach(section => {
+        section.style.scrollSnapAlign = 'none';
+      });
+    } else {
+      // Pour molette : snap automatique activé
+      horizontalContainer.style.scrollSnapType = 'x mandatory';
+      sections.forEach(section => {
+        section.style.scrollSnapAlign = 'start';
+      });
     }
   };
   
@@ -160,45 +196,98 @@ const setupWheelNavigation = () => {
     }
   };
 
-  // Écouter les changements de scroll pour mettre à jour la position
+  // Variables pour le snap automatique des trackpads
+  let snapTimeout;
+  let isUserScrolling = false;
+  let lastScrollTime = 0;
+  
+  // Fonction de snap automatique pour trackpads
+  const snapToNearestSection = () => {
+    if (isScrolling || isMouseWheel) return;
+    
+    const scrollLeft = horizontalContainer.scrollLeft;
+    const sectionWidth = window.innerWidth;
+    const currentSectionFloat = scrollLeft / sectionWidth;
+    const nearestSection = Math.round(currentSectionFloat);
+    const targetScrollLeft = nearestSection * sectionWidth;
+    
+    // Si on est assez proche du centre (dans les 20% de la section)
+    const distanceFromCenter = Math.abs(currentSectionFloat - nearestSection);
+    if (distanceFromCenter < 0.2) {
+      horizontalContainer.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth'
+      });
+      currentSectionIndex.value = nearestSection;
+    }
+  };
+  
+  // Écouter les changements de scroll
   let scrollTimeout;
   horizontalContainer.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(updateCurrentSection, 100);
+    clearTimeout(snapTimeout);
+    
+    const now = Date.now();
+    isUserScrolling = true;
+    lastScrollTime = now;
+    
+    // Mettre à jour la section courante
+    scrollTimeout = setTimeout(() => {
+      updateCurrentSection();
+      isUserScrolling = false;
+      
+      // Pour les trackpads, déclencher le snap après un délai
+      if (isTrackpad && !isScrolling) {
+        snapTimeout = setTimeout(snapToNearestSection, 150);
+      }
+    }, 100);
   });
 
   const handleWheel = (e) => {
-    // Détecter le type de trackpad pour les premiers événements
-    detectMacTrackpad(e);
+    // Détecter le type de périphérique
+    detectInputDevice(e);
     
-    // Éviter les scrolls trop rapides
-    if (isScrolling) {
-      e.preventDefault();
-      return;
-    }
-
     // Si l'utilisateur vient d'utiliser le touch, ignorer temporairement
     if (isUsingTouch) {
       return;
     }
 
-    // Protection contre les gestes de swipe horizontaux sur trackpad
+    // Protection contre les gestes de swipe horizontaux
     const deltaX = Math.abs(e.deltaX);
     const deltaY = Math.abs(e.deltaY);
     
-    // Ajuster les seuils selon le type de périphérique
-    const horizontalThreshold = isMacTrackpad ? 20 : 15;
-    const verticalThreshold = isMacTrackpad ? 1 : 2;
-    
-    // Détecter si c'est un geste purement horizontal (swipe gauche/droite intentionnel)
-    if (deltaX > 0 && deltaY === 0 && deltaX > horizontalThreshold) {
-      // C'est un swipe horizontal pur, on l'ignore complètement
+    // Ignorer les swipes horizontaux purs
+    if (deltaX > 0 && deltaY === 0 && deltaX > 15) {
       e.preventDefault();
       return;
     }
     
-    // Pour les trackpads Mac, être plus tolérant avec les petits mouvements
-    if (deltaY < verticalThreshold) {
+    // Comportement différent selon le périphérique
+    if (isTrackpad) {
+      // TRACKPAD : Scroll libre, laisser le navigateur gérer le scroll naturellement
+      // On ne fait rien, le scroll natif se charge du mouvement
+      // Le snap se déclenchera automatiquement via l'event listener scroll
+      return;
+    } else if (isMouseWheel) {
+      // MOLETTE : Navigation forcée section par section (comportement actuel)
+      handleMouseWheelNavigation(e);
+    } else {
+      // Comportement par défaut pour les périphériques non détectés (prudent = molette)
+      handleMouseWheelNavigation(e);
+    }
+  };
+  
+  // Fonction séparée pour la navigation à la molette (comportement forcé)
+  const handleMouseWheelNavigation = (e) => {
+    // Éviter les scrolls trop rapides
+    if (isScrolling) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Ignorer les mouvements trop faibles
+    if (Math.abs(e.deltaY) < 5) {
       return;
     }
 
@@ -349,14 +438,14 @@ const disableFooterScrollMode = () => {
 <style>
 @import "~/assets/css/animations.css";
 
-/* Scroll horizontal avec snap points */
+/* Scroll horizontal */
 .horizontal-container {
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  /* Le scroll-snap-type sera géré dynamiquement via JS selon le périphérique */
 }
 
 .section-page {
-  scroll-snap-align: start;
+  /* scroll-snap-align sera géré dynamiquement via JS selon le périphérique */
 }
 
 /* Bordures des sections - Desktop: gauche/droite, Mobile: bas */
