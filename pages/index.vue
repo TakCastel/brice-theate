@@ -253,12 +253,18 @@ const setupWheelNavigation = () => {
       return;
     }
 
-    // Protection contre les gestes de swipe horizontaux
+    // Protection stricte contre TOUT mouvement horizontal sur trackpad
     const deltaX = Math.abs(e.deltaX);
     const deltaY = Math.abs(e.deltaY);
     
-    // Ignorer les swipes horizontaux purs
-    if (deltaX > 0 && deltaY === 0 && deltaX > 15) {
+    // Pour trackpad : ignorer complètement TOUT mouvement qui a du deltaX
+    if (isTrackpad && deltaX > 0) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Pour autres périphériques : ignorer seulement les swipes horizontaux purs
+    if (!isTrackpad && deltaX > 0 && deltaY === 0 && deltaX > 15) {
       e.preventDefault();
       return;
     }
