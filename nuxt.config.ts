@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   css: ["~/assets/css/main.css"],
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/brice-theate/' : '/',
+    baseURL: '/',
     head: {
       link: [
         {
