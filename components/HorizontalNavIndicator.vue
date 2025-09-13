@@ -1,5 +1,5 @@
 <template>
-  <div class="horizontal-nav-indicator fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 hidden md:block">
+  <div class="horizontal-nav-indicator absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30 hidden md:block">
     <div class="flex space-x-2 bg-black/20 backdrop-blur-sm rounded-full px-4 py-2">
       <button
         v-for="(section, index) in sections"

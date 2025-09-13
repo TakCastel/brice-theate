@@ -1,7 +1,10 @@
 <template>
   <footer
     id="contact"
-    class="py-16 text-gray-800 border-t-[0.25px] border-black"
+    :class="[
+      'py-16 text-gray-800',
+      showTopBorder ? 'border-t-[0.25px] border-black' : ''
+    ]"
     style="background-color: #f8f7f4"
   >
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
@@ -58,7 +61,7 @@
               </svg>
             </a>
             <a
-              href="https://x.com/intent/tweet?text=Découvrez le travail de Brice Théâte, scénariste&url=https://brice-theate.com"
+              href="https://x.com/intent/tweet?text=Découvrez mon travail de scénariste&url=https://brice-theate.com"
               target="_blank"
               rel="noopener noreferrer"
               class="text-gray-600 hover:text-gray-800 transition-colors"
@@ -94,3 +97,15 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+// Détecter si on doit afficher la bordure en haut
+// (uniquement sur les pages statiques, pas sur l'index)
+const showTopBorder = computed(() => {
+  // Vérifier si on est côté client et si ce n'est pas la page d'accueil
+  if (process.client) {
+    return window.location.pathname !== '/';
+  }
+  return false;
+});
+</script>

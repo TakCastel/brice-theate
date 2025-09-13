@@ -1,6 +1,6 @@
 <template>
   <div
-    class="project-card relief-card-border p-6 hover:shadow-lg transition-all duration-300"
+    class="project-card border border-gray-300 p-6 hover:border-black hover:shadow-lg transition-all duration-500 ease-in-out"
   >
     <!-- Header de la card -->
     <div class="flex items-start justify-between mb-4">

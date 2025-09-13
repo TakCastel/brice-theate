@@ -6,7 +6,7 @@
     <!-- Main content -->
     <main class="pt-20">
       <section class="py-24">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto px-4 lg:px-6">
           <h1
             class="text-3xl md:text-4xl font-normal tracking-tight mb-16 text-center"
           >
@@ -20,10 +20,10 @@
                 Introduction
               </h2>
               <p class="text-gray-700 leading-relaxed">
-                Cette politique de confidentialité décrit comment Brice Théâte
+                Cette politique de confidentialité décrit comment je
                 collecte, utilise et protège les informations que vous
-                fournissez lors de l'utilisation de ce site web. Nous nous
-                engageons à protéger votre vie privée et à traiter vos données
+                fournissez lors de l'utilisation de ce site web. Je m'engage
+                à protéger votre vie privée et à traiter vos données
                 personnelles de manière transparente et sécurisée.
               </p>
             </div>
@@ -34,7 +34,7 @@
                 Collecte des données
               </h2>
               <p class="text-gray-700 leading-relaxed mb-4">
-                Nous collectons les informations suivantes :
+                Je collecte les informations suivantes :
               </p>
               <ul
                 class="text-gray-700 leading-relaxed list-disc list-inside space-y-2"
@@ -98,7 +98,7 @@
                 Sécurité des données
               </h2>
               <p class="text-gray-700 leading-relaxed">
-                Nous mettons en place des mesures de sécurité appropriées pour
+                Je mets en place des mesures de sécurité appropriées pour
                 protéger vos données personnelles contre l'accès non autorisé,
                 la modification, la divulgation ou la destruction. Le site
                 utilise le protocole HTTPS pour sécuriser les transmissions.

@@ -1,7 +1,7 @@
 <template>
   <section
     id="biographie"
-    class="biography-section h-full w-full py-24 bg-white z-10 border-l-[0.25px] border-black flex items-center justify-center"
+    class="section-page biography-section w-screen h-full flex-shrink-0 py-24 bg-white z-10 border-l-[0.25px] border-black flex items-center justify-center"
   >
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -35,12 +35,12 @@
           <p
             class="text-line text-lg leading-relaxed text-gray-700 animate-on-scroll stagger-2"
           >
-            Brice Théâte est scénariste, installé à Avignon. Il aime écrire des
+            Je suis scénariste, installé à Avignon. J'aime écrire des
             histoires, surtout quand elles font sourire. C'est en répondant par
-            hasard à une recherche de scénariste qu'il a commencé, avant de
-            rejoindre le collectif Kino. Depuis, il a participé à plusieurs
+            hasard à une recherche de scénariste que j'ai commencé, avant de
+            rejoindre le collectif Kino. Depuis, j'ai participé à plusieurs
             courts-métrages, souvent absurdes, parfois tendres, toujours un peu
-            décalés. Ce qu'il cherche, c'est le bon angle pour faire rire,
+            décalés. Ce que je cherche, c'est le bon angle pour faire rire,
             parfois avec presque rien.
           </p>
         </div>

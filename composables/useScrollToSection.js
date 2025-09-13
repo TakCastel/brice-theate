@@ -1,5 +1,18 @@
 export const useScrollToSection = () => {
   const scrollToSection = (sectionId) => {
+    // Vérifier si on est sur la page d'accueil
+    const isHomePage = window.location.pathname === '/';
+    
+    // Si on n'est pas sur la page d'accueil, rediriger vers l'accueil avec l'ancre
+    if (!isHomePage) {
+      // Utiliser navigateTo de Nuxt pour une navigation propre
+      if (process.client) {
+        // Rediriger vers l'accueil avec l'ancre
+        window.location.href = `/#${sectionId}`;
+      }
+      return;
+    }
+    
     // Mapping des sections avec leurs positions horizontales (index × largeur de viewport)
     const sectionPositions = {
       'hero': 0,         // Page d'accueil

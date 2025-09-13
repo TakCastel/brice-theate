@@ -66,6 +66,7 @@ html {
   position: relative;
   border: 1px solid #000;
   background: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .enhanced-card-border::before {
@@ -97,6 +98,7 @@ html {
   position: relative;
   border: 1px solid #000;
   background: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .decorative-card-border::before {
@@ -154,6 +156,14 @@ html {
   box-shadow: 
     2px 2px 0px #000,
     4px 4px 0px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.relief-card-border:hover {
+  box-shadow: 
+    3px 3px 0px #000,
+    6px 6px 0px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
 }
 
 /* Bordure vintage avec texture */
@@ -161,6 +171,7 @@ html {
   position: relative;
   border: 2px solid #000;
   background: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   /* Texture subtile */
   background-image: 
@@ -185,6 +196,7 @@ html {
   position: relative;
   background: white;
   border: 1px solid #000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   /* Gradient border effect */
   background-clip: padding-box;

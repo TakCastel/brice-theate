@@ -6,7 +6,7 @@
     <!-- Main content -->
     <main class="pt-20">
       <section class="py-24">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto px-4 lg:px-6">
           <h1
             class="text-3xl md:text-4xl font-normal tracking-tight mb-16 text-center"
           >
@@ -20,7 +20,7 @@
                 Éditeur du site
               </h2>
               <p class="text-gray-700 leading-relaxed">
-                Ce site est édité par Brice Théâte, scénariste.<br />
+                Ce site est édité par moi, Brice Théâte, scénariste.<br />
                 Adresse : Avignon, France<br />
                 Email : theatebrice@gmail.com
               </p>
@@ -66,7 +66,7 @@
               <p class="text-gray-700 leading-relaxed">
                 Les liens hypertextes mis en place dans le cadre du présent site
                 web en direction d'autres ressources présentes sur le réseau
-                Internet ne sauraient engager la responsabilité de Brice Théâte.
+                Internet ne sauraient engager ma responsabilité.
               </p>
             </div>
 

@@ -1,7 +1,7 @@
 <template>
   <section
     id="contact"
-    class="contact-section h-full w-full py-24 bg-white z-10 border-l-[0.25px] border-black flex items-center justify-center"
+    class="section-page contact-section w-screen h-full flex-shrink-0 py-24 bg-white z-10 border-l-[0.25px] border-black flex items-center justify-center"
   >
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2
@@ -14,7 +14,7 @@
         <div class="contact-content max-w-2xl w-full">
           <!-- Introduction -->
           <p class="text-line text-lg mb-8 text-center animate-on-scroll stagger-1">
-            Pour toute question, collaboration ou projet, n'hésitez pas à le contacter.
+            Pour toute question, collaboration ou projet, n'hésitez pas à me contacter.
           </p>
 
           <!-- Formulaire de contact -->
@@ -122,7 +122,7 @@
 
             <!-- Message de confirmation -->
             <div v-if="showSuccess" class="mt-6 p-4 bg-green-50 border border-green-200 text-green-800 text-center">
-              ✓ Votre message a été envoyé avec succès ! Brice vous répondra dans les plus brefs délais.
+              ✓ Votre message a été envoyé avec succès ! Je vous répondrai dans les plus brefs délais.
             </div>
 
             <div v-if="showError" class="mt-6 p-4 bg-red-50 border border-red-200 text-red-800 text-center">
