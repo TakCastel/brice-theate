@@ -43,21 +43,11 @@
             Page précédente
           </button>
         </div>
-
-        <!-- Citation créative -->
-        <div class="mt-16 pt-8 border-t border-gray-200">
-          <blockquote class="text-sm md:text-base text-gray-500 italic">
-            "Parfois, les meilleures histoires naissent des chemins que l'on n'avait pas prévus."
-          </blockquote>
-          <cite class="block mt-2 text-xs uppercase tracking-wider text-gray-400">
-            — Brice Théâte
-          </cite>
-        </div>
       </div>
     </main>
 
     <!-- Footer -->
-    <AppFooter />
+    <AppFooter :showTopBorder="true" />
   </div>
 </template>
 

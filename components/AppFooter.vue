@@ -99,9 +99,23 @@
 </template>
 
 <script setup>
+// Props pour contrôler l'affichage du border-top
+const props = defineProps({
+  showTopBorder: {
+    type: Boolean,
+    default: false
+  }
+});
+
 // Détecter si on doit afficher la bordure en haut sur desktop
-// Seulement sur les pages mentions légales et politique de confidentialité
+// Sur les pages mentions légales, politique de confidentialité ou via la prop
 const showTopBorderDesktop = computed(() => {
+  // Si la prop est passée, l'utiliser
+  if (props.showTopBorder) {
+    return true;
+  }
+  
+  // Sinon, détecter automatiquement pour certaines pages
   if (process.client) {
     const pathname = window.location.pathname;
     return pathname === '/mentions-legales' || pathname === '/politique-confidentialite';

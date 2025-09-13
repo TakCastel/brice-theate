@@ -122,6 +122,19 @@ const setupWheelNavigation = () => {
   
   if (!horizontalContainer || !sections.length) return;
 
+  // Variable pour détecter si l'utilisateur utilise le touch
+  let isUsingTouch = false;
+  
+  // Détecter l'utilisation du touch pour désactiver temporairement la navigation wheel
+  const handleTouchStart = () => {
+    isUsingTouch = true;
+    setTimeout(() => {
+      isUsingTouch = false;
+    }, 500); // Reset après 500ms sans touch
+  };
+  
+  document.addEventListener('touchstart', handleTouchStart, { passive: true });
+
   // Fonction pour détecter la section actuelle basée sur la position de scroll
   const updateCurrentSection = () => {
     const scrollLeft = horizontalContainer.scrollLeft;
@@ -148,12 +161,37 @@ const setupWheelNavigation = () => {
       return;
     }
 
+    // Si l'utilisateur vient d'utiliser le touch, ignorer temporairement
+    if (isUsingTouch) {
+      return;
+    }
+
+    // Protection contre les gestes de swipe horizontaux sur trackpad
+    // Les utilisateurs peuvent instinctivement essayer de swiper gauche/droite
+    // mais cela génère des événements wheel avec deltaX qui peuvent perturber la navigation
+    const deltaX = Math.abs(e.deltaX);
+    const deltaY = Math.abs(e.deltaY);
+    
+    // Si le mouvement horizontal domine (swipe gauche/droite), on l'ignore
+    // Seuil de 10px pour éviter les faux positifs sur les mouvements diagonaux légers
+    if (deltaX > deltaY && deltaX > 10) {
+      // C'est un swipe horizontal intentionnel, on l'ignore pour éviter les bugs
+      e.preventDefault();
+      return;
+    }
+    
+    // Ignorer les mouvements verticaux trop faibles (tremblements, micro-mouvements)
+    // Seuil de 5px pour filtrer les gestes involontaires
+    if (deltaY < 5) {
+      return;
+    }
+
     // Mode footer : scroll vers le footer uniquement
     if (isFooterScrollMode.value) {
       e.preventDefault();
-      const deltaY = e.deltaY;
+      const deltaYValue = e.deltaY;
       
-      if (deltaY > 0) {
+      if (deltaYValue > 0) {
         // Scroll vers le bas -> aller au footer
         if (window.pageYOffset === 0) {
           lastSectionBeforeFooter = currentSectionIndex.value; // Sauvegarder la section actuelle
@@ -169,9 +207,9 @@ const setupWheelNavigation = () => {
     }
 
     // Mode navigation horizontale normal
-    const deltaY = e.deltaY;
-    const isScrollingDown = deltaY > 0;
-    const isScrollingUp = deltaY < 0;
+    const deltaYValue = e.deltaY;
+    const isScrollingDown = deltaYValue > 0;
+    const isScrollingUp = deltaYValue < 0;
 
     // Navigation vers la droite (scroll vers le bas)
     if (isScrollingDown) {
@@ -270,11 +308,13 @@ const setupWheelNavigation = () => {
 
   // Écouter les événements de scroll sur desktop uniquement
   if (window.innerWidth > 768) {
+    // Utiliser { passive: false } pour pouvoir faire preventDefault sur les swipes horizontaux
     document.addEventListener('wheel', handleWheel, { passive: false });
     
     // Nettoyer l'event listener au démontage
     onUnmounted(() => {
       document.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('hashchange', handleHashNavigation);
     });
   }

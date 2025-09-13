@@ -58,24 +58,24 @@ onMounted(() => {
   titleLetters.value.forEach((letter, index) => {
     titleTimeline.to(letter, {
       visible: true,
-      duration: 0.02,
-      delay: index * 0.03,
+      duration: 0.008,
+      delay: index * 0.012,
     });
   });
 
   // Animation du sous-titre après le titre
-  titleTimeline.to({}, { duration: 0.2 }); // Pause
+  titleTimeline.to({}, { duration: 0.08 }); // Pause
 
   subtitleLetters.value.forEach((letter, index) => {
     titleTimeline.to(letter, {
       visible: true,
-      duration: 0.02,
-      delay: index * 0.025,
+      duration: 0.008,
+      delay: index * 0.01,
     });
   });
 
   // Masquer le curseur à la fin de l'animation
-  titleTimeline.to({}, { duration: 0.5 }); // Pause finale
+  titleTimeline.to({}, { duration: 0.2 }); // Pause finale
   titleTimeline.to(".cursor", {
     opacity: 0,
     duration: 0.3,
