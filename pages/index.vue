@@ -94,8 +94,6 @@ const handleHashNavigation = () => {
     setTimeout(() => {
       const { scrollToSection } = useScrollToSection();
       scrollToSection(hash);
-      // Nettoyer l'ancre pour éviter les conflits futurs
-      history.replaceState(null, null, window.location.pathname);
       
       // Libérer le verrou après un délai
       setTimeout(() => {
@@ -107,12 +105,9 @@ const handleHashNavigation = () => {
 
 // Navigation et gestion des événements
 onMounted(() => {
-  // Gérer la navigation depuis l'URL avec ancre
+  // Gérer la navigation depuis l'URL avec ancre au premier chargement seulement
   handleHashNavigation();
   
-  // Écouter les changements d'ancre
-  window.addEventListener('hashchange', handleHashNavigation);
-
   // Navigation au scroll avec la molette
   setupWheelNavigation();
 });
@@ -277,7 +272,6 @@ const setupWheelNavigation = () => {
     // Nettoyer l'event listener au démontage
     onUnmounted(() => {
       document.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('hashchange', handleHashNavigation);
     });
   }
 };
