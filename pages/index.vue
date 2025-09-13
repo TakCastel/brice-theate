@@ -108,6 +108,9 @@ onMounted(() => {
   // Gérer la navigation depuis l'URL avec ancre au premier chargement seulement
   handleHashNavigation();
   
+  // Écouter les changements d'ancre (pour navigation depuis d'autres pages)
+  window.addEventListener('hashchange', handleHashNavigation);
+  
   // Navigation au scroll avec la molette
   setupWheelNavigation();
 });
@@ -272,6 +275,7 @@ const setupWheelNavigation = () => {
     // Nettoyer l'event listener au démontage
     onUnmounted(() => {
       document.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('hashchange', handleHashNavigation);
     });
   }
 };

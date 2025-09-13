@@ -1,5 +1,18 @@
 export const useScrollToSection = () => {
   const scrollToSection = (sectionId) => {
+    // Vérifier si on est sur la page d'accueil
+    const currentPath = window.location.pathname;
+    const isHomePage = currentPath === '/' || currentPath === '/index.html' || currentPath === '';
+    
+    // Si on n'est pas sur la page d'accueil, rediriger vers l'accueil avec l'ancre
+    if (!isHomePage) {
+      if (process.client) {
+        // Utiliser window.location pour naviguer vers l'accueil avec ancre
+        window.location.href = `/#${sectionId}`;
+      }
+      return;
+    }
+    
     // Vérifier si on a déjà une ancre dans l'URL pour éviter les boucles
     const currentHash = window.location.hash.substring(1);
     
