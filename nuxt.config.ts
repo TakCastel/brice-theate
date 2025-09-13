@@ -5,6 +5,15 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/',
     head: {
+      htmlAttrs: {
+        lang: 'fr'
+      },
+      title: 'Brice Théâte - Scénariste professionnel et créateur de récits originaux',
+      meta: [
+        { name: 'description', content: 'Brice Théâte, scénariste professionnel spécialisé dans la création de récits originaux et l\'adaptation d\'œuvres littéraires. Découvrez mon approche créative et mes projets de scénarios.' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { charset: 'utf-8' }
+      ],
       link: [
         {
           rel: "preconnect",

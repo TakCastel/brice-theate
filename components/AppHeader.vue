@@ -7,9 +7,9 @@
         <!-- Logo/Titre -->
         <div class="-ml-0.5">
           <a href="/" class="hover:opacity-80 transition-opacity">
-            <h1 class="text-xl font-normal uppercase tracking-tight">
+            <div class="text-xl font-normal uppercase tracking-tight">
               Brice Théâte
-            </h1>
+            </div>
             <p
               class="text-xs font-normal uppercase tracking-wider text-gray-500"
             >

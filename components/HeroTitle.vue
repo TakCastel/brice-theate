@@ -34,7 +34,7 @@ import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
 
 const titleText = "BRICE THÉÂTE";
-const subtitleText = "SCÉNARISTE";
+const subtitleText = "SCÉNARISTE ET CRÉATEUR DE RÉCITS";
 
 const titleLetters = ref([]);
 const subtitleLetters = ref([]);
@@ -52,34 +52,35 @@ onMounted(() => {
     visible: false,
   }));
 
-  // Animation du titre
+  // Animation du titre avec un rythme constant
   const titleTimeline = gsap.timeline();
 
+  // Animation du titre - chaque lettre apparaît à intervalle régulier
   titleLetters.value.forEach((letter, index) => {
     titleTimeline.to(letter, {
       visible: true,
-      duration: 0.008,
-      delay: index * 0.012,
-    });
+      duration: 0.05,
+    }, index * 0.08); // Position absolue dans la timeline
   });
 
-  // Animation du sous-titre après le titre
-  titleTimeline.to({}, { duration: 0.08 }); // Pause
+  // Pause avant le sous-titre
+  const titleDuration = titleLetters.value.length * 0.08;
+  titleTimeline.to({}, { duration: 0.2 }, titleDuration);
 
+  // Animation du sous-titre avec le même rythme
   subtitleLetters.value.forEach((letter, index) => {
     titleTimeline.to(letter, {
       visible: true,
-      duration: 0.008,
-      delay: index * 0.01,
-    });
+      duration: 0.05,
+    }, titleDuration + 0.2 + (index * 0.06)); // Position absolue dans la timeline
   });
 
-  // Masquer le curseur à la fin de l'animation
-  titleTimeline.to({}, { duration: 0.2 }); // Pause finale
+  // Masquer le curseur à la fin
+  const totalDuration = titleDuration + 0.2 + (subtitleLetters.value.length * 0.06);
   titleTimeline.to(".cursor", {
     opacity: 0,
     duration: 0.3,
-  });
+  }, totalDuration + 0.3);
 });
 </script>
 
